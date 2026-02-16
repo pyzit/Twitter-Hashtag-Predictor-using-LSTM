@@ -7,9 +7,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = BASE_DIR / "model_lstm.h5"
-TOKENIZER_PATH = BASE_DIR / "tokenizer.pkl"
-MLB_PATH = BASE_DIR / "mlb.pkl"
+ARTIFACTS_DIR = BASE_DIR / "artifacts"
+MODEL_PATH = ARTIFACTS_DIR / "model_lstm.h5"
+TOKENIZER_PATH = ARTIFACTS_DIR / "tokenizer.pkl"
+MLB_PATH = ARTIFACTS_DIR / "mlb.pkl"
 
 max_len = 100
 
@@ -29,4 +30,3 @@ def predict_hashtags_top_k(new_text, top_k=3):
     top_indices = np.argsort(probs)[-top_k:][::-1]
     predicted_hashtags = [mlb.classes_[i] for i in top_indices]
     return predicted_hashtags
-
