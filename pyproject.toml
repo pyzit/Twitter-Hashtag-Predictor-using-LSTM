@@ -3,5 +3,5 @@ name = "twitter-hashtag-predictor-using-lstm"
 version = "1.1.0"
 description = "Twitter Hashtag Predictor | #Improved by @pyzit"
 readme = "README.md"
-requires-python = ">=3.10.19"
+requires-python = ">=3.9.25"
 dependencies = []
