@@ -140,6 +140,12 @@ Flask app (app.py -> create_app)
             └─ mlb.pkl
 ```
 
+### Visual architecture (diagram)
+
+<p align="center">
+  <img src="./docs/architecture.png" alt="Application Architecture" width="420" />
+</p>
+
 ### Application factory (`create_app`)
 
 Located in `hashtag_predictor/__init__.py`:
@@ -185,6 +191,20 @@ Conceptual steps when a tweet comes in:
    - the function returns a list of predicted hashtags as strings
 
 This is a **multi-label classification** setup where each tweet can have multiple correct hashtags.
+
+### Visual ML pipeline (diagram)
+
+```mermaid
+flowchart LR
+    Tweet[Raw Tweet Text] --> Clean[Preprocess & Tokenize]
+    Clean --> Seq[Integer Token Sequence]
+    Seq --> Pad[Pad/Truncate to max_len]
+    Pad --> LSTM[LSTM Model]
+    LSTM --> Probs[Per-hashtag Probabilities]
+    Probs --> TopK[Select Top-k Indices]
+    TopK --> Map[Map Indices to Hashtag Labels]
+    Map --> Output[Suggested Hashtags]
+```
 
 ---
 
@@ -328,8 +348,12 @@ Contributions are welcome! Suggested flow:
    - description of changes
    - screenshots/plots if you modified UI or evaluation code
 
+For a detailed list of changes between versions, see [CHANGELOG.md](./CHANGELOG.md).
+
 ---
 
 ## License
 
-Specify the project license here (e.g., MIT, Apache-2.0). If you add a `LICENSE` file, reference it from this section.
+This project is licensed under the **MIT License**.
+
+See [LICENSE](./LICENSE) for full license text.
